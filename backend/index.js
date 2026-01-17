@@ -15,7 +15,7 @@ app.use(cors());
 // Middleware must be applied before routes to parse JSON request bodies
 app.use(bodyParser.json());
 
-app.use("/tasks", TaskRouter);
+app.use("/api/tasks", TaskRouter);
 
 //testing server
 app.get("/", (req, res) => {
