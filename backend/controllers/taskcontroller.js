@@ -1,14 +1,15 @@
 const TaskModel = require("../models/taskmodel");
+const mongoose = require("mongoose");
 
 const createTask = async (req, res) => {
   const data = req.body;
   try {
     // Check if database is connected
-    if (TaskModel.db.readyState !== 1) {
+    if (mongoose.connection.readyState !== 1) {
       return res.status(503).json({
         message: "Database connection not available",
         success: false,
-        error: "Database is not connected. Please check DB_URL environment variable.",
+        error: "Database is not connected. Please check DB_URL environment variable in Vercel settings.",
       });
     }
     const model = new TaskModel(data);
@@ -28,11 +29,11 @@ const createTask = async (req, res) => {
 const fetchAllTasks = async (req, res) => {
   try {
     // Check if database is connected
-    if (TaskModel.db.readyState !== 1) {
+    if (mongoose.connection.readyState !== 1) {
       return res.status(503).json({
         message: "Database connection not available",
         success: false,
-        error: "Database is not connected. Please check DB_URL environment variable.",
+        error: "Database is not connected. Please check DB_URL environment variable in Vercel settings.",
       });
     }
     const data = await TaskModel.find({});
@@ -49,11 +50,11 @@ const fetchAllTasks = async (req, res) => {
 const updateTaskByID = async (req, res) => {
   try {
     // Check if database is connected
-    if (TaskModel.db.readyState !== 1) {
+    if (mongoose.connection.readyState !== 1) {
       return res.status(503).json({
         message: "Database connection not available",
         success: false,
-        error: "Database is not connected. Please check DB_URL environment variable.",
+        error: "Database is not connected. Please check DB_URL environment variable in Vercel settings.",
       });
     }
     const id = req.params.id;
@@ -79,11 +80,11 @@ const updateTaskByID = async (req, res) => {
 const DeleteTaskByID = async (req, res) => {
   try {
     // Check if database is connected
-    if (TaskModel.db.readyState !== 1) {
+    if (mongoose.connection.readyState !== 1) {
       return res.status(503).json({
         message: "Database connection not available",
         success: false,
-        error: "Database is not connected. Please check DB_URL environment variable.",
+        error: "Database is not connected. Please check DB_URL environment variable in Vercel settings.",
       });
     }
     const id = req.params.id;
